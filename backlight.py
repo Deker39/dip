@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
         while True:
             #if pir.motion_detected:
-            if get_sensor:
+            if get_sensor():
                 print("Goog , detected")
                 print('Color wipe animations.')
                 # colorWipe(strip, Color(132, 132, 0))  # Red wipe
