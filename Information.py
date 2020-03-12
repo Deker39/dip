@@ -1,24 +1,14 @@
 #!/usr/bin/env python2
-#HEAD#########################################################
-#
-# Katana Framework | Information File                        
-# Last Modified: 14/03/2017
-#
-#########################################################HEAD#
-
-
 import os, time, subprocess
 from sys import stdout
 
 
-__nickname__   = 'Katana Framework'
-__author__     = 'RedToor'
-__emailadd__   = 'redtoor@inbox.ru'
-__twitter__    = 'https://twitter.com/redtoor'
-__facebook__   = 'https://facebook.com/redtoor'
-__license__    = 'GPLv3'
+__nickname__   = 'Magic_Mirror'
+__author__     = 'Deker39'
+__emailadd__   = 'bigtigerlesha@gmail.com'
+
 
 version        = "1.0.0.1"
-date           = "25/12/16:14/03/17"
-build          = "0069"
-Type           = "FREE"
+date           = "12/03/20"
+build          = "0013"
+Type           = "ALEX"
