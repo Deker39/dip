@@ -17,7 +17,7 @@ LED_BRIGHTNESS = 100  # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-pir = MotionSensor(16)
+
 
 
 # Define functions which animate LEDs in various ways.
@@ -72,7 +72,7 @@ if __name__ == '__main__':
             #if pir.motion_detected:
             if get_sensor():
                 print("Goog , detected")
-                print('Color wipe animations.')
+                #print('Color wipe animations.')
                 # colorWipe(strip, Color(132, 132, 0))  # Red wipe
                 colorWipe(strip, Color(255, 0, 204))  # Blue wipe
                 # colorWipe(strip, Color(0, 0, 255))  # Green wipe
