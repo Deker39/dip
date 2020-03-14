@@ -85,14 +85,14 @@ font_news_headlines = tkinter.font.Font(
 weather_api_key = 'b15c4bc4ca3c9dc000f988b8d742990d'
 ip_api_key = '5b5e944af6a945e4e0891c4836b4b9d4'
 # file_object.close()
-units = ForecastIO.ForecastIO.UNITS_US
-lang = ForecastIO.ForecastIO.LANG_ENGLISH
+units = ForecastIO.ForecastIO.UNITS_SI
+lang = ForecastIO.ForecastIO.LANG_RUSSIAN
 
-time_format = '%I:%M'
+time_format = '%H:%M'
 date_format = '%A, %B %d, %Y'
 
 # News
-google_news_url = "https://news.google.com/news/rss/?gl=US&ned=us&hl=en"
+google_news_url = "https://news.google.com/rss?hl=ru&gl=UA&ceid=UA:ru"
 
 # Calendar
 SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
@@ -142,7 +142,7 @@ label_current_temp_low = Label(
     frame_current_high_low, bg='black', fg='white', font=font_holiday)
 
 label_news_title = Label(frame_b_left, font=font_news_headlines,
-                         text="Headlines",
+                         text="Newes",
                          bg='black',
                          fg='white')
 
@@ -207,10 +207,10 @@ def current_weather():
 
     # Sets Weather Object
     r = requests.get(weather_url)
-    print(weather_url)
+    #print(weather_url)
     weather_obj = json.loads(r.text)
     weather_data.append(weather_obj)
-    print(weather_obj)
+    #print(weather_obj)
     for data in weather_data:
 
 
@@ -441,3 +441,4 @@ frame_newspaper.pack(side=LEFT, anchor=W)
 frame_top.pack(expand=TRUE, fill=BOTH, side=TOP)
 frame_bottom.pack(expand=TRUE, fill=BOTH, side=BOTTOM)
 root.mainloop()
+
