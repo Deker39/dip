@@ -2,8 +2,9 @@ import cv2
 import numpy as np
 import os
 
-from gpiozero import MotionSensor
+
 import time
+from motion_sensor import get_sensor
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('trainer/trainer.yml')
@@ -12,7 +13,7 @@ faceCascade = cv2.CascadeClassifier(cascadePath);
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-pir = MotionSensor(16)
+
 # iniciate id counter
 id = 0
 
@@ -29,7 +30,7 @@ minW = 0.1 * cam.get(3)
 minH = 0.1 * cam.get(4)
 
 while True:
-    if pir.motion_detected:
+    if get_sensor():
         ret, img = cam.read()
         img = cv2.flip(img, -1)  # Flip vertically
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -74,3 +75,4 @@ while True:
 print("\n [INFO] Exiting Program and cleanup stuff")
 cam.release()
 cv2.destroyAllWindows()
+
