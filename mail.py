@@ -42,14 +42,17 @@ def main():
     results = service.users().messages().list(userId='me',labelIds=['INBOX'],).execute()
     messages = results.get('messages',[])
 
-    message_count= 3
+    message_count= 5
     if not messages:
         print("Not messages")
     else:
         print("Messages")
         for message in messages[:message_count] :
             msg = service.users( ).messages( ).get( userId='me', id= message['id'] ).execute ( )
-            print ( msg['snippet'] )
+            data = msg['snippet'].split ( )
+            kek = data[:15]
+            data1= ' '.join ( kek )
+            print (data1)
             #print(msg['internalDate'])
            # print ( "\n" )
 

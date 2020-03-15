@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+
 import datetime
 import json
 import os
@@ -18,6 +19,13 @@ from forecastiopy import *
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
+
+
+import pickle
+import os.path
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
 
 try:
     import argparse
@@ -49,10 +57,14 @@ frame_calendar = Frame(frame_t_left, background='black')
 frame_calendar_image = Frame(frame_calendar, background='black')
 frame_calendar_events = Frame(frame_calendar, background='black')
 
+#frame_tb_left = Frame(frame_top, background='black')
+frame_gmail = Frame(frame_t_left, background='black')
+frame_gmail_image = Frame(frame_gmail, background='black')
+frame_gmail_events = Frame(frame_gmail, background='black')
+
 frame_t_right = Frame(frame_top, background='black')
 frame_weather = Frame(frame_t_right, background='black')
 frame_current_high_low = Frame(frame_weather, background='black')
-
 
 
 frame_forecast = Frame(frame_t_right, background='black')
@@ -70,17 +82,16 @@ frame_b_right = Frame(frame_bottom, background='black')
 root.geometry('{}x{}'.format(screen_width, screen_height))
 
 # Fonts
+font_gmail =  tkinter.font.Font(family ='Helvetica', size= medium_text_size)
 font_time = tkinter.font.Font(family='Helvetica', size=x_large_text_size)
 font_date = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_location = tkinter.font.Font(family='Helvetica', size=medium_text_size)
-font_temperature = tkinter.font.Font(
-    family='Helvetica', size=x_large_text_size)
+font_temperature = tkinter.font.Font(family='Helvetica', size=x_large_text_size)
 font_quote = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_holiday = tkinter.font.Font(family='Helvetica', size=small_text_size)
 font_weather = tkinter.font.Font(family='Helvetica', size=small_text_size)
 font_news = tkinter.font.Font(family='Helvetica', size=x_small_text_size)
-font_news_headlines = tkinter.font.Font(
-    family='Helvetica', size=medium_text_size)
+font_news_headlines = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 
 # Weather
 #file_object = open('C:/Users/PWRxPSYCHO/Desktop/API_Key.txt')
@@ -97,7 +108,8 @@ date_format = '%A, %B %d, %Y'
 google_news_url = "https://news.google.com/rss?hl=ru&gl=UA&ceid=UA:ru"
 
 # Calendar
-SCOPES = 'https://www.googleapis.com/auth/calendar.readonly'
+SCOPES_CALENDAR = 'https://www.googleapis.com/auth/calendar.readonly'
+SCOPES_GMAIL = ['https://www.googleapis.com/auth/gmail.readonly']
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
@@ -132,28 +144,15 @@ photo_calendar = ImageTk.PhotoImage(image_calendar)
 # Labels
 weather_image_lg = Label(frame_weather, bg='black', fg='white')
 
-label_temperature = Label(frame_weather, font=font_temperature,
-                          bg='black',
-                          fg='white')
-label_location = Label(frame_weather, font=font_location,
-                       bg='black',
-                       fg='white')
-label_current_temp_high = Label(
-    frame_current_high_low, bg='black', fg='white', font=font_holiday)
-label_current_temp_low = Label(
-    frame_current_high_low, bg='black', fg='white', font=font_holiday)
+label_temperature = Label(frame_weather, font=font_temperature,bg='black',fg='white')
+label_location = Label(frame_weather, font=font_location,bg='black',fg='white')
+label_current_temp_high = Label(frame_current_high_low, bg='black', fg='white', font=font_holiday)
+label_current_temp_low = Label(frame_current_high_low, bg='black', fg='white', font=font_holiday)
 
-label_news_title = Label(frame_b_left, font=font_news_headlines,
-                         text="Newes",
-                         bg='black',
-                         fg='white')
+label_news_title = Label(frame_b_left, font=font_news_headlines,text="Newes", bg='black', fg='white')
 
-label_date = Label(frame_t_left, font=font_date,
-                   bg='black',
-                   fg='white')
-label_clock = Label(frame_t_left, font=font_time,
-                    bg='black',
-                    fg='white')
+label_date = Label(frame_t_left, font=font_date,bg='black',fg='white')
+label_clock = Label(frame_t_left, font=font_time, bg='black', fg='white')
 
 # Layout Top Left
 label_date.pack(side=TOP, anchor=W)
@@ -329,7 +328,7 @@ def get_ip():
         return "Error: %s. Cannot get ip. " % e
 
 
-def get_credentials():
+def get_credentials_calendar():
     """Gets valid user credentials from storage.
 
     If nothing has been stored, or if the stored credentials are invalid,
@@ -348,7 +347,7 @@ def get_credentials():
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
-        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
+        flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES_CALENDAR)
         flow.user_agent = APPLICATION_NAME
         if flags:
             credentials = tools.run_flow(flow, store, flags)
@@ -368,32 +367,27 @@ def get_calendar():
         widget.destroy()
     for i in frame_calendar_image.winfo_children():
         i.destroy()
-    credentials = get_credentials()
+    credentials = get_credentials_calendar()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('calendar', 'v3', http=http)
 
     now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
 
-    eventsResult = service.events().list(
-        calendarId='primary', timeMin=now, maxResults=10, singleEvents=True,
-        orderBy='startTime').execute()
+    eventsResult = service.events().list(calendarId='primary', timeMin=now, maxResults=10, singleEvents=True, orderBy='startTime').execute()
     events = eventsResult.get('items', [])
 
     if not events:
         print('No upcoming events found.')
     for event in events[0:5]:
-        label_calender_image = Label(
-            frame_calendar_image, bg='black', fg='white')
-        label_calender = Label(frame_calendar_events,
-                               font=font_news, bg='black', fg='white')
+        label_calender_image = Label( frame_calendar_image, bg='black', fg='white')
+        label_calender = Label(frame_calendar_events, font=font_news, bg='black', fg='white')
 
         label_calender_image.configure(image=photo_calendar)
         label_calender_image.icon = photo_calendar
 
         if event['start'].get('dateTime') is None and event['end'].get('dateTime') is None:
             start_date = event['start'].get('date')
-            start_date_format = datetime.datetime.strptime(
-                start_date, "%Y-%m-%d")
+            start_date_format = datetime.datetime.strptime(start_date, "%Y-%m-%d")
             start = datetime.datetime.strftime(start_date_format, "%b, %d")
             label_calender['text'] = str(start) + ": " + event['summary']
         else:
@@ -415,16 +409,76 @@ def get_calendar():
         label_calender_image.pack(side=TOP, anchor=W)
     label_calender.after(600000, get_calendar)
 
+def get_credentials_gmail():
+    creds = None
+
+    if os.path.exists ( 'token.pickle' ) :
+        with open ( 'token.pickle', 'rb' ) as token :
+            creds = pickle.load ( token )
+
+    if not creds or not creds.valid :
+        if creds and creds.expired and creds.refresh_token :
+            creds.refresh ( Request ( ) )
+        else :
+            flow = InstalledAppFlow.from_client_secrets_file (
+                'client_secret.json', SCOPES_GMAIL )
+            creds = flow.run_local_server ( port=0 )
+
+        with open ( 'token.pickle', 'wb' ) as token :
+            pickle.dump ( creds, token )
+
+    service = build ( 'gmail', 'v1', credentials=creds )
+
+    return  service
+
+
+def get_gmail():
+
+    # Get Messages
+    results = get_credentials_gmail().users ( ).messages ( ).list ( userId='me', labelIds=['INBOX'], ).execute ( )
+
+    messages = results.get ( 'messages', [] )
+
+    if not messages :
+        print ( "Not messages" )
+    for message in messages[0 :5]:
+        label_gmail = Label ( frame_gmail_events, font=font_news, bg='black', fg='white' )
+        msg = get_credentials_gmail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
+
+        if msg['snippet'] is None and msg['snippet'] is None :
+            label_gmail['text'] = str ( msg['snippet'] )
+
+        else :
+            data = msg['snippet'].split()
+            kek = data[:15]
+            data1 = ' '.join(kek)
+            label_gmail['text'] = data1 + "..."
+            #print ( msg['snippet'] )
+        label_gmail.pack ( side=TOP, anchor=W )
+
+
+
+
+
+
 
 tick()
 current_weather()
 get_news()
 get_calendar()
+get_gmail()
+
+
 
 frame_t_left.pack(side=LEFT, anchor=N, padx=40, pady=40)
 frame_calendar.pack(side=TOP, anchor=W)
 frame_calendar_events.pack(side=RIGHT, anchor=N)
 frame_calendar_image.pack(side=LEFT, anchor=N)
+
+frame_t_left.pack(side=LEFT, anchor=N, padx=40, pady=40)
+frame_gmail.pack(side=TOP, anchor=W)
+frame_gmail_events.pack(side=RIGHT, anchor=N)
+frame_gmail_image.pack(side=LEFT, anchor=N)
 
 frame_t_right.pack(side=RIGHT, anchor=N, padx=40, pady=40)
 frame_weather.pack(side=TOP, anchor=N)
