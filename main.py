@@ -53,6 +53,8 @@ frame_t_right = Frame(frame_top, background='black')
 frame_weather = Frame(frame_t_right, background='black')
 frame_current_high_low = Frame(frame_weather, background='black')
 
+
+
 frame_forecast = Frame(frame_t_right, background='black')
 frame_days = Frame(frame_forecast, background='black')
 frame_days_icon = Frame(frame_forecast, background='black')
