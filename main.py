@@ -58,9 +58,9 @@ frame_calendar_image = Frame(frame_calendar, background='black')
 frame_calendar_events = Frame(frame_calendar, background='black')
 
 #frame_tb_left = Frame(frame_top, background='black')
-frame_gmail = Frame(frame_t_left, background='black')
-frame_gmail_image = Frame(frame_gmail, background='black')
-frame_gmail_events = Frame(frame_gmail, background='black')
+frame_mail = Frame(frame_t_left, background='black')
+frame_mail_image = Frame(frame_mail, background='black')
+frame_mail_events = Frame(frame_mail, background='black')
 
 frame_t_right = Frame(frame_top, background='black')
 frame_weather = Frame(frame_t_right, background='black')
@@ -82,7 +82,8 @@ frame_b_right = Frame(frame_bottom, background='black')
 root.geometry('{}x{}'.format(screen_width, screen_height))
 
 # Fonts
-font_gmail =  tkinter.font.Font(family ='Helvetica', size= medium_text_size)
+font_calendar =  tkinter.font.Font(family ='Helvetica', size= medium_text_size)
+font_mail =  tkinter.font.Font(family ='Helvetica', size= medium_text_size)
 font_time = tkinter.font.Font(family='Helvetica', size=x_large_text_size)
 font_date = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_location = tkinter.font.Font(family='Helvetica', size=medium_text_size)
@@ -109,7 +110,7 @@ google_news_url = "https://news.google.com/rss?hl=ru&gl=UA&ceid=UA:ru"
 
 # Calendar
 SCOPES_CALENDAR = 'https://www.googleapis.com/auth/calendar.readonly'
-SCOPES_GMAIL = ['https://www.googleapis.com/auth/gmail.readonly']
+SCOPES_MAIL = ['https://www.googleapis.com/auth/gmail.readonly']
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
@@ -141,6 +142,11 @@ image_calendar = image_calendar.resize((25, 25), Image.ANTIALIAS)
 image_calendar = image_calendar.convert('RGB')
 photo_calendar = ImageTk.PhotoImage(image_calendar)
 
+image_mail = Image.open("assets/Letter.png")
+image_mail = image_mail.resize((25, 25), Image.ANTIALIAS)
+image_mail = image_mail.convert('RGB')
+photo_mail= ImageTk.PhotoImage(image_mail)
+
 # Labels
 weather_image_lg = Label(frame_weather, bg='black', fg='white')
 
@@ -148,6 +154,10 @@ label_temperature = Label(frame_weather, font=font_temperature,bg='black',fg='wh
 label_location = Label(frame_weather, font=font_location,bg='black',fg='white')
 label_current_temp_high = Label(frame_current_high_low, bg='black', fg='white', font=font_holiday)
 label_current_temp_low = Label(frame_current_high_low, bg='black', fg='white', font=font_holiday)
+
+label_calendar_title = Label(frame_calendar, font=font_calendar,text="Calendar", bg='black', fg='white')
+
+label_mail_title = Label(frame_mail, font=font_mail,text="Mail", bg='black', fg='white')
 
 label_news_title = Label(frame_b_left, font=font_news_headlines,text="Newes", bg='black', fg='white')
 
@@ -157,6 +167,10 @@ label_clock = Label(frame_t_left, font=font_time, bg='black', fg='white')
 # Layout Top Left
 label_date.pack(side=TOP, anchor=W)
 label_clock.pack(side=TOP, anchor=W)
+label_calendar_title.pack(side=TOP, anchor=W)
+label_mail_title.pack(side=TOP, anchor=W)
+
+
 
 # Layout Top Right
 label_location.pack(side=TOP)
@@ -168,6 +182,7 @@ label_current_temp_low.pack(side=RIGHT, anchor=E)
 
 # Layout Bottom Left
 label_news_title.pack(side=TOP, anchor=W)
+
 
 
 # Clock function
@@ -201,10 +216,12 @@ def current_weather():
     latitude = location_obj['latitude']
     longitude = location_obj['longitude']
 
-    weather_url = "https://api.darksky.net/forecast/%s/%s,%s?lang=%s&units=%s" % (weather_api_key, latitude, longitude,lang,units)
+
+    weather_url = "https://api.darksky.net/forecast/%s/%s,%s?lang=%s&units=%s" % (weather_api_key, latitude, longitude,lang,units,)
     #https: // api.darksky.net / forecast / b15c4bc4ca3c9dc000f988b8d742990d / 46.477500915527344, 30.73259925842285?lang = en & units = us
 
-    location = "%s, %s" % (location_obj['city'], location_obj['region_code'])
+    location = location_obj['city']
+                           #, location_obj['region_code'])
 
     # Sets Weather Object
     r = requests.get(weather_url)
@@ -245,19 +262,18 @@ def current_weather():
         if fahrenheit != label_temperature["text"]:
             label_temperature["text"] = format(fahrenheit, '.0f') + "°"
 
+#Убрать зону 51 из одесы
         if location != label_location['text']:
             label_location['text'] = location
+
 
         week_days = data['daily']['data']
     for day in week_days[1:6]:
 
-        label_days = Label(frame_days, bg='black',
-                           fg='white', font=font_holiday)
+        label_days = Label(frame_days, bg='black',fg='white', font=font_holiday)
         label_days_icon = Label(frame_days_icon, bg='black', fg='white')
-        label_temp_high = Label(
-            frame_temp_high, bg='black', fg='white', font=font_holiday)
-        label_temp_low = Label(frame_temp_low, bg='black',
-                               fg='white', font=font_holiday)
+        label_temp_high = Label( frame_temp_high, bg='black', fg='white', font=font_holiday)
+        label_temp_low = Label(frame_temp_low, bg='black', fg='white', font=font_holiday)
 
         daily_icon_id = day['icon']
 
@@ -409,7 +425,9 @@ def get_calendar():
         label_calender_image.pack(side=TOP, anchor=W)
     label_calender.after(600000, get_calendar)
 
-def get_credentials_gmail():
+
+
+def get_credentials_mail():
     creds = None
 
     if os.path.exists ( 'token.pickle' ) :
@@ -421,7 +439,7 @@ def get_credentials_gmail():
             creds.refresh ( Request ( ) )
         else :
             flow = InstalledAppFlow.from_client_secrets_file (
-                'client_secret.json', SCOPES_GMAIL )
+                'client_secret.json', SCOPES_MAIL )
             creds = flow.run_local_server ( port=0 )
 
         with open ( 'token.pickle', 'wb' ) as token :
@@ -432,29 +450,35 @@ def get_credentials_gmail():
     return  service
 
 
-def get_gmail():
+def get_mail():
 
     # Get Messages
-    results = get_credentials_gmail().users ( ).messages ( ).list ( userId='me', labelIds=['INBOX'], ).execute ( )
+    results = get_credentials_mail().users ( ).messages ( ).list ( userId='me', labelIds=['INBOX'], ).execute ( )
 
     messages = results.get ( 'messages', [] )
 
     if not messages :
         print ( "Not messages" )
     for message in messages[0 :5]:
-        label_gmail = Label ( frame_gmail_events, font=font_news, bg='black', fg='white' )
-        msg = get_credentials_gmail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
+        label_mail_image = Label ( frame_mail_image, bg='black', fg='white' )
+        label_mail = Label ( frame_mail_events, font=font_news, bg='black', fg='white' )
+
+        label_mail_image.configure ( image=photo_mail )
+        label_mail_image.icon = photo_mail
+
+        msg = get_credentials_mail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
 
         if msg['snippet'] is None and msg['snippet'] is None :
-            label_gmail['text'] = str ( msg['snippet'] )
+            label_mail['text'] = str ( msg['snippet'] )
 
         else :
             data = msg['snippet'].split()
-            kek = data[:15]
+            kek = data[:10]
             data1 = ' '.join(kek)
-            label_gmail['text'] = data1 + "..."
+            label_mail['text'] = data1 + "..."
             #print ( msg['snippet'] )
-        label_gmail.pack ( side=TOP, anchor=W )
+        label_mail_image.pack ( side=TOP, anchor=W )
+        label_mail.pack ( side=TOP, anchor=W )
 
 
 
@@ -466,7 +490,7 @@ tick()
 current_weather()
 get_news()
 get_calendar()
-get_gmail()
+get_mail()
 
 
 
@@ -476,9 +500,9 @@ frame_calendar_events.pack(side=RIGHT, anchor=N)
 frame_calendar_image.pack(side=LEFT, anchor=N)
 
 frame_t_left.pack(side=LEFT, anchor=N, padx=40, pady=40)
-frame_gmail.pack(side=TOP, anchor=W)
-frame_gmail_events.pack(side=RIGHT, anchor=N)
-frame_gmail_image.pack(side=LEFT, anchor=N)
+frame_mail.pack(side=TOP, anchor=W)
+frame_mail_events.pack(side=RIGHT, anchor=N)
+frame_mail_image.pack(side=LEFT, anchor=N)
 
 frame_t_right.pack(side=RIGHT, anchor=N, padx=40, pady=40)
 frame_weather.pack(side=TOP, anchor=N)
