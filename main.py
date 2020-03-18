@@ -425,7 +425,7 @@ def get_calendar():
 
         label_calender.pack(side=TOP, anchor=W)
         label_calender_image.pack(side=TOP, anchor=W)
-    label_calender.after(150000, get_calendar)
+    label_calender.after(600000, get_calendar)
 
 
 
@@ -486,7 +486,7 @@ def get_mail():
                 # print ( msg['snippet'] )
             label_mail_image.pack ( side=TOP, anchor=W )
             label_mail.pack ( side=TOP, anchor=W )
-        label_mail.after ( 150000, get_mail )
+        label_mail.after ( 600000, get_mail )
 
     except Exception as e:
         traceback.print_exc()
