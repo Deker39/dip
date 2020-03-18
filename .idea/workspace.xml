@@ -56,8 +56,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-762">
-              <caret line="92" column="12" selection-start-line="92" selection-end-line="92" selection-end-column="12" />
+            <state relative-caret-position="156">
+              <caret line="480" column="18" lean-forward="true" selection-start-line="480" selection-start-column="18" selection-end-line="480" selection-end-column="18" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -100,9 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>fahrenheit</find>
-      <find>ret</find>
-      <find>ip</find>
       <find>time_format</find>
       <find>tick</find>
       <find>frame_b_left</find>
@@ -130,6 +127,9 @@
       <find>font_temperature</find>
       <find>font_quote</find>
       <find>font_holiday</find>
+      <find>widget</find>
+      <find>winfo_children</find>
+      <find>frame_news</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,9 +154,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="949" />
-    <option name="width" value="978" />
-    <option name="height" value="1048" />
+    <option name="x" value="948" />
+    <option name="width" value="979" />
+    <option name="height" value="1049" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -354,7 +354,21 @@
       <option name="project" value="LOCAL" />
       <updated>1584532078605</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Обловляетья почта и календарь">
+      <created>1584551482542</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1584551482542</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Замена таймаутов">
+      <created>1584551510156</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1584551510156</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -392,7 +406,9 @@
     <MESSAGE value="1" />
     <MESSAGE value="Добавления почты" />
     <MESSAGE value="Доделана почта и нормально выставлен календарь" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделана почта и нормально выставлен календарь" />
+    <MESSAGE value="Обловляетья почта и календарь" />
+    <MESSAGE value="Замена таймаутов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Замена таймаутов" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/assets/Calendar.png">
@@ -498,8 +514,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-762">
-          <caret line="92" column="12" selection-start-line="92" selection-end-line="92" selection-end-column="12" />
+        <state relative-caret-position="156">
+          <caret line="480" column="18" lean-forward="true" selection-start-line="480" selection-start-column="18" selection-end-line="480" selection-end-column="18" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
