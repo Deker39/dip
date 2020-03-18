@@ -6,7 +6,7 @@ from gpiozero import MotionSensor
 import time
 
 # LED strip configuration:
-from motionsensor import get_sensor
+from motion_sensor import get_sensor
 
 LED_COUNT = 60  # Number of LED pixels.
 LED_PIN = 18  # GPIO pin connected to the pixels (18 uses PWM!).
