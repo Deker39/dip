@@ -35,11 +35,12 @@ except ImportError:
     flags = None
 
 # Text size
-x_large_text_size = 94
-large_text_size = 48
-medium_text_size = 28
-small_text_size = 18
-x_small_text_size = 14
+x_large_text_size = 47#94
+large_text_size = 35#48
+medium_text_size = 20#28
+small_text_size = 15#18
+
+x_small_text_size = 11#14
 
 # tk objects
 root = Tk()
@@ -90,7 +91,7 @@ font_location = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_temperature = tkinter.font.Font(family='Helvetica', size=x_large_text_size)
 font_quote = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_holiday = tkinter.font.Font(family='Helvetica', size=small_text_size)
-font_weather = tkinter.font.Font(family='Helvetica', size=small_text_size)
+font_weather = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_news = tkinter.font.Font(family='Helvetica', size=x_small_text_size)
 font_news_headlines = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 
@@ -469,7 +470,7 @@ def get_mail():
         msg = get_credentials_mail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
 
         if msg['snippet'] is None and msg['snippet'] is None :
-            label_mail['text'] = str ( msg['snippet'] )
+            label_mail['text'] =  msg['snippet']
 
         else :
             data = msg['snippet'].split()
