@@ -35,12 +35,12 @@ except ImportError:
     flags = None
 
 # Text size
-x_large_text_size = 47#94
-large_text_size = 35#48
-medium_text_size = 20#28
-small_text_size = 15#18
-
-x_small_text_size = 11#14
+x_large_text_size = 47
+large_text_size = 35
+medium_text_size = 20
+medium_text_weather_size = 18
+small_text_size = 15
+x_small_text_size = 11
 
 # tk objects
 root = Tk()
@@ -90,8 +90,9 @@ font_date = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_location = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 font_temperature = tkinter.font.Font(family='Helvetica', size=x_large_text_size)
 font_quote = tkinter.font.Font(family='Helvetica', size=medium_text_size)
-font_holiday = tkinter.font.Font(family='Helvetica', size=small_text_size)
-font_weather = tkinter.font.Font(family='Helvetica', size=medium_text_size)
+font_holiday = tkinter.font.Font(family='Helvetica', size=medium_text_weather_size)
+font_weather = tkinter.font.Font(family='Helvetica', size=small_text_size)
+
 font_news = tkinter.font.Font(family='Helvetica', size=x_small_text_size)
 font_news_headlines = tkinter.font.Font(family='Helvetica', size=medium_text_size)
 
@@ -134,17 +135,17 @@ weather_data = []
 
 # Images
 image = Image.open("assets/Newspaper.png")
-image = image.resize((25, 25), Image.ANTIALIAS)
+image = image.resize((20, 20), Image.ANTIALIAS)
 image = image.convert('RGB')
 photo = ImageTk.PhotoImage(image)
 
 image_calendar = Image.open("assets/Calendar.png")
-image_calendar = image_calendar.resize((25, 25), Image.ANTIALIAS)
+image_calendar = image_calendar.resize((20, 20), Image.ANTIALIAS)
 image_calendar = image_calendar.convert('RGB')
 photo_calendar = ImageTk.PhotoImage(image_calendar)
 
 image_mail = Image.open("assets/Letter.png")
-image_mail = image_mail.resize((25, 25), Image.ANTIALIAS)
+image_mail = image_mail.resize((20, 20), Image.ANTIALIAS)
 image_mail = image_mail.convert('RGB')
 photo_mail= ImageTk.PhotoImage(image_mail)
 
@@ -470,7 +471,7 @@ def get_mail():
         msg = get_credentials_mail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
 
         if msg['snippet'] is None and msg['snippet'] is None :
-            label_mail['text'] =  msg['snippet']
+            label_mail['text'] =  msg['snippet'] 
 
         else :
             data = msg['snippet'].split()
@@ -480,6 +481,7 @@ def get_mail():
             #print ( msg['snippet'] )
         label_mail_image.pack ( side=TOP, anchor=W )
         label_mail.pack ( side=TOP, anchor=W )
+    label_mail.after(150000, get_mail)
 
 
 
@@ -522,4 +524,5 @@ frame_newspaper.pack(side=LEFT, anchor=W)
 frame_top.pack(expand=TRUE, fill=BOTH, side=TOP)
 frame_bottom.pack(expand=TRUE, fill=BOTH, side=BOTTOM)
 root.mainloop()
+
 
