@@ -425,7 +425,7 @@ def get_calendar():
 
         label_calender.pack(side=TOP, anchor=W)
         label_calender_image.pack(side=TOP, anchor=W)
-    label_calender.after(600000, get_calendar)
+    label_calender.after(150000, get_calendar)
 
 
 
@@ -453,40 +453,44 @@ def get_credentials_mail():
 
 
 def get_mail():
+    for widget in frame_mail_events.winfo_children():
+        widget.destroy()
+    for i in frame_mail_image.winfo_children():
+        i.destroy()
+    try :
+        # Get Messages
+        results = get_credentials_mail ( ).users ( ).messages ( ).list ( userId='me', labelIds=['INBOX'], ).execute ( )
 
-    # Get Messages
-    results = get_credentials_mail().users ( ).messages ( ).list ( userId='me', labelIds=['INBOX'], ).execute ( )
+        messages = results.get ( 'messages', [] )
 
-    messages = results.get ( 'messages', [] )
+        if not messages :
+            print ( "Not messages" )
+        for message in messages[0 :5] :
+            label_mail_image = Label ( frame_mail_image, bg='black', fg='white' )
+            label_mail = Label ( frame_mail_events, font=font_news, bg='black', fg='white' )
 
-    if not messages :
-        print ( "Not messages" )
-    for message in messages[0 :5]:
-        label_mail_image = Label ( frame_mail_image, bg='black', fg='white' )
-        label_mail = Label ( frame_mail_events, font=font_news, bg='black', fg='white' )
+            label_mail_image.configure ( image=photo_mail )
+            label_mail_image.icon = photo_mail
 
-        label_mail_image.configure ( image=photo_mail )
-        label_mail_image.icon = photo_mail
+            msg = get_credentials_mail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
+            label_mail['text'] = msg['snippet']
 
-        msg = get_credentials_mail ( ).users ( ).messages ( ).get ( userId='me', id=message['id'] ).execute ( )
+            if msg['snippet'] is None and msg['snippet'] is None :
+                label_mail['text'] = msg['snippet']
 
-        if msg['snippet'] is None and msg['snippet'] is None :
-            label_mail['text'] =  msg['snippet'] 
+            else :
+                data = msg['snippet'].split ( )
+                kek = data[:10]
+                data1 = ' '.join ( kek )
+                label_mail['text'] = data1 + "..."
+                # print ( msg['snippet'] )
+            label_mail_image.pack ( side=TOP, anchor=W )
+            label_mail.pack ( side=TOP, anchor=W )
+        label_mail.after ( 150000, get_mail )
 
-        else :
-            data = msg['snippet'].split()
-            kek = data[:10]
-            data1 = ' '.join(kek)
-            label_mail['text'] = data1 + "..."
-            #print ( msg['snippet'] )
-        label_mail_image.pack ( side=TOP, anchor=W )
-        label_mail.pack ( side=TOP, anchor=W )
-    label_mail.after(150000, get_mail)
-
-
-
-
-
+    except Exception as e:
+        traceback.print_exc()
+        print("Error: %s. Cannot get mail." % e)
 
 
 tick()
