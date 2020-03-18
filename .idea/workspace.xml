@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="03f61431-29d2-435e-bdb5-ee6ae16707ff" name="Default Changelist" comment="что то в токене">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/token.pickle" afterDir="false" />
-    </list>
+    <list default="true" id="03f61431-29d2-435e-bdb5-ee6ae16707ff" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584310087667</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Доделана почта и нормально выставлен календарь">
+      <created>1584402279184</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1584402279184</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -357,19 +360,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1753" height="954" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.110658124" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4997088" visible="true" weight="0.15431349" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4997088" weight="0.15431349" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32928312" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32883435" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32806805" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.33171323" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5002912" side_tool="true" weight="0.32806805" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32928312" />
@@ -381,7 +383,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
     <MESSAGE value="Добавления почты" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавления почты" />
+    <MESSAGE value="Доделана почта и нормально выставлен календарь" />
+    <option name="LAST_COMMIT_MESSAGE" value="Доделана почта и нормально выставлен календарь" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/assets/Calendar.png">
