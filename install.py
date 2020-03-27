@@ -2,6 +2,7 @@ import Information, colors
 import os, time, subprocess
 from sys import stdout
 
+
 def Command_exe(msg, cmd):
     i = "\033[1mSTATUS"+colors.W+":[Processing]"
     stdout.write(" "+msg+" %s" % i)
@@ -44,3 +45,9 @@ print ("                   I_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"
 print ("                   \_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_/                                 ")#                   \_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_"+colors.R+"|"+colors.W+"_/
 print ("")
 print ("")
+
+
+
+
+time.sleep(15)
+exit(0)
