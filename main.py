@@ -46,6 +46,9 @@ x_small_text_size = 11
 root = Tk()
 root.title('Smart Mirror')
 root.configure(background='black')
+root.attributes('-fullscreen',True)
+
+
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
@@ -528,5 +531,7 @@ frame_newspaper.pack(side=LEFT, anchor=W)
 frame_top.pack(expand=TRUE, fill=BOTH, side=TOP)
 frame_bottom.pack(expand=TRUE, fill=BOTH, side=BOTTOM)
 root.mainloop()
+
+
 
 

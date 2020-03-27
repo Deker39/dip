@@ -12,5 +12,3 @@ code = process.wait ( )
 
 print ( code )  # 0
 
-
-print('В сраку гіляку')
