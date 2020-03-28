@@ -14,7 +14,7 @@ faceCascade = cv2.CascadeClassifier(cascadePath);
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 program = " python /home/pi/dip/main.py"
-program1 = "sudo python /home/pi/dip/backlight.py"
+program1 = "sudo python /home/pi/dip/backlight.py -c"
 # iniciate id counter
 id = 0
 
