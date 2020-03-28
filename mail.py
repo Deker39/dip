@@ -2,9 +2,9 @@
 import subprocess
 
 program = "main.py"
-process = subprocess.Popen(program, shell= True)
-code = process.wait( )
-print ( process.stdout )  # 0
+subprocess.Popen(program, shell= True)
+#code = process.wait( )
+#print ( process.stdout )  # 0
 #sys.exit(0)
 print('В сраку гіляку')
 
