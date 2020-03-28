@@ -49,6 +49,7 @@ root.configure(background='black')
 root.attributes('-fullscreen',True)
 
 
+
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
@@ -312,7 +313,7 @@ def current_weather():
         label_temp_high.pack(side=TOP, anchor=W)
         label_temp_low.pack(side=TOP, anchor=W)
 
-    label_temperature.after(600000, current_weather)
+    label_temperature.after(300000, current_weather)
 
 
 def get_news():
@@ -333,7 +334,7 @@ def get_news():
             label_news['text'] = post['title']
             newspaper_image.pack(side=TOP, anchor=W)
             label_news.pack(side=TOP, anchor=W)
-        frame_news.after(600000, get_news)
+        frame_news.after(300000, get_news)
 
     except Exception as e:
         traceback.print_exc()
@@ -384,6 +385,7 @@ def get_calendar():
     Creates a Google Calendar API service object and outputs a list of the next
     5 events on the user's calendar.
     """
+    global label_calender
     for widget in frame_calendar_events.winfo_children():
         widget.destroy()
     for i in frame_calendar_image.winfo_children():
@@ -428,7 +430,7 @@ def get_calendar():
 
         label_calender.pack(side=TOP, anchor=W)
         label_calender_image.pack(side=TOP, anchor=W)
-    label_calender.after(600000, get_calendar)
+    label_calender.after(300000, get_calendar)
 
 
 
@@ -456,6 +458,7 @@ def get_credentials_mail():
 
 
 def get_mail():
+    global label_mail
     for widget in frame_mail_events.winfo_children():
         widget.destroy()
     for i in frame_mail_image.winfo_children():
@@ -489,7 +492,7 @@ def get_mail():
                 # print ( msg['snippet'] )
             label_mail_image.pack ( side=TOP, anchor=W )
             label_mail.pack ( side=TOP, anchor=W )
-        label_mail.after ( 600000, get_mail )
+        label_mail.after ( 300000, get_mail )
 
     except Exception as e:
         traceback.print_exc()
@@ -530,8 +533,10 @@ frame_newspaper.pack(side=LEFT, anchor=W)
 
 frame_top.pack(expand=TRUE, fill=BOTH, side=TOP)
 frame_bottom.pack(expand=TRUE, fill=BOTH, side=BOTTOM)
-root.mainloop()
 
+#включить таймер и есть истекло время то фолс и мы выходим из проги
+root.after(60000, root.destroy)
+root.mainloop()
 
 
 
