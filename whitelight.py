@@ -57,6 +57,7 @@ if __name__ == '__main__':
         while True:
             colorWipe(strip, Color(255, 0, 204))  # Blue wipe
             colorWipe(strip, Color(0, 0, 0), 1)
+            exit(0)
 
 
     except KeyboardInterrupt:

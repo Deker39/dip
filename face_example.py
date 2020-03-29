@@ -1,20 +1,18 @@
 import cv2
-import numpy as np
-import os
 import subprocess
 
-import time
 from motion_sensor import get_sensor
-from cffi.setuptools_ext import execfile
+
 
 recognizer = cv2.face.LBPHFaceRecognizer_create ( )
 recognizer.read ( 'trainer/trainer.yml' )
 cascadePath = "/home/pi/opencv/data/haarcascades/haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier ( cascadePath );
+faceCascade = cv2.CascadeClassifier ( cascadePath )
 
 font = cv2.FONT_HERSHEY_SIMPLEX
-program = " python /home/pi/dip/main.py"
-program1 = "sudo python /home/pi/dip/backlight.py -c"
+
+
+
 # iniciate id counter
 id = 0
 
@@ -72,8 +70,6 @@ while True :
         # time.sleep(10)
 
     else :
-        # print("Not found")
-        # cam.release()
         cv2.destroyAllWindows ( )
 
 # Do a bit of cleanup
