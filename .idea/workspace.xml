@@ -4,7 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/mail.py" line="30" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03f61431-29d2-435e-bdb5-ee6ae16707ff" name="Default Changelist" comment="нууу бд">
+    <list default="true" id="03f61431-29d2-435e-bdb5-ee6ae16707ff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,7 +32,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -103,9 +103,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="width" value="975" />
-    <option name="height" value="1046" />
+    <option name="x" value="950" />
+    <option name="width" value="977" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -113,6 +113,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,7 +125,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,6 +287,7 @@
       <updated>1583778684817</updated>
       <workItem from="1585765677088" duration="730000" />
       <workItem from="1585766435079" duration="4013000" />
+      <workItem from="1585772439582" duration="14000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1584303373260</created>
@@ -393,11 +394,18 @@
       <option name="project" value="LOCAL" />
       <updated>1585771899577</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="нууу бд">
+      <created>1585772451683</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1585772451683</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4743000" />
+    <option name="totallyTimeSpent" value="4757000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -411,7 +419,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1753" height="954" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10973451" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.110914454" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
