@@ -5,7 +5,6 @@ import subprocess
 
 import time
 from motion_sensor import get_sensor
-from cffi.setuptools_ext import execfile
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('trainer/trainer.yml')
@@ -14,10 +13,10 @@ faceCascade = cv2.CascadeClassifier(cascadePath);
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 program = " python /home/pi/dip/main.py"
-program1 = "sudo python /home/pi/dip/backlight.py -c"
+program1 = "sudo python /home/pi/dip/whitelight.py"
 # iniciate id counter
 id = 0
-
+res = False
 # names related to ids: example ==> Marcelo: id=1,  etc
 names = ['None', 'Alexey']
 
@@ -32,6 +31,7 @@ minH = 0.1 * cam.get(4)
 
 while True:
     if get_sensor():
+        res = True
         #subprocess.Popen(program1 , shell = True)
         ret, img = cam.read()
         img = cv2.flip(img, -1)  # Flip vertically
@@ -53,10 +53,10 @@ while True:
                 kek = confidence 
                 id = names[id]
                 confidence = "  {0}%".format(round(100 - confidence))
-                if(kek > 80):
+                #if(kek > 65):
                     #execfile("main.py", globals())        
-                    process = subprocess.Popen(program, shell=True)
-                    code = process.wait ( )
+                    #process = subprocess.Popen(program, shell=True)
+                    #code = process.wait ( )
             else:
                 id = "unknown"
                 confidence = "  {0}%".format(round(100 - confidence))
@@ -76,6 +76,7 @@ while True:
         #print("Not found")
         #cam.release()
         cv2.destroyAllWindows()
+        res = False
 
 
 
@@ -83,6 +84,7 @@ while True:
 print("\n [INFO] Exiting Program and cleanup stuff")
 cam.release()
 cv2.destroyAllWindows()
+
 
 
 
