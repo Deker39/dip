@@ -11,6 +11,7 @@ faceCascade = cv2.CascadeClassifier ( cascadePath )
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
+program = " python /home/pi/dip/main.py"
 
 # iniciate id counter
 id = 0
@@ -29,7 +30,6 @@ minH = 0.1 * cam.get ( 4 )
 
 while True :
     if get_sensor ( ) :
-        res = True
         # subprocess.Popen(program1 , shell = True)
         ret, img = cam.read ( )
         img = cv2.flip ( img, -1 )  # Flip vertically
@@ -51,16 +51,15 @@ while True :
                 kek = confidence
                 id = names[id]
                 confidence = "  {0}%".format ( round ( 100 - confidence ) )
-                if (kek > 80) :
-                    # execfile("main.py", globals())
+                if (kek > 100) :
+                    
+                    #execfile("main.py", globals())
                     process = subprocess.Popen ( program, shell=True )
                     code = process.wait ( )
             else :
                 id = "unknown"
                 confidence = "  {0}%".format ( round ( 100 - confidence ) )
 
-            cv2.putText ( img, str ( id ), (x + 5, y - 5), font, 1, (255, 255, 255), 2 )
-            cv2.putText ( img, str ( confidence ), (x + 5, y + h - 5), font, 1, (255, 255, 0), 1 )
 
         cv2.imshow ( 'camera', img )
 
@@ -71,12 +70,12 @@ while True :
 
     else :
         cv2.destroyAllWindows ( )
-        res = False
 
 # Do a bit of cleanup
 print ( "\n [INFO] Exiting Program and cleanup stuff" )
 cam.release ( )
 cv2.destroyAllWindows ( )
+
 
 
 
