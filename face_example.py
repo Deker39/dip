@@ -12,7 +12,6 @@ faceCascade = cv2.CascadeClassifier ( cascadePath )
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 
-
 # iniciate id counter
 id = 0
 
@@ -30,6 +29,7 @@ minH = 0.1 * cam.get ( 4 )
 
 while True :
     if get_sensor ( ) :
+        res = True
         # subprocess.Popen(program1 , shell = True)
         ret, img = cam.read ( )
         img = cv2.flip ( img, -1 )  # Flip vertically
@@ -71,6 +71,7 @@ while True :
 
     else :
         cv2.destroyAllWindows ( )
+        res = False
 
 # Do a bit of cleanup
 print ( "\n [INFO] Exiting Program and cleanup stuff" )
