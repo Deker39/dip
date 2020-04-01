@@ -1,6 +1,5 @@
 from __future__ import print_function
 
-
 import datetime
 import json
 import os
@@ -14,7 +13,7 @@ import feedparser
 import httplib2
 import requests
 from PIL import ImageTk, Image
-from apiclient import discovery
+#from apiclient import discovery
 from forecastiopy import *
 from oauth2client import client
 from oauth2client import tools
@@ -23,6 +22,7 @@ from oauth2client.file import Storage
 
 import pickle
 import os.path
+from googleapiclient import discovery
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -537,6 +537,7 @@ frame_bottom.pack(expand=TRUE, fill=BOTH, side=BOTTOM)
 #включить таймер и есть истекло время то фолс и мы выходим из проги
 root.after(60000, root.destroy)
 root.mainloop()
+
 
 
 
