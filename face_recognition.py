@@ -4,7 +4,10 @@ import os
 import subprocess
 
 import time
+
+import db
 from motion_sensor import get_sensor
+
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read('trainer/trainer.yml')
@@ -19,6 +22,7 @@ id = 0
 res = False
 # names related to ids: example ==> Marcelo: id=1,  etc
 names = ['None', 'Alexey']
+
 
 # Initialize and start realtime video capture
 cam = cv2.VideoCapture(0)
