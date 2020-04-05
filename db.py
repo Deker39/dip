@@ -14,14 +14,9 @@ def call_cursor(con):
     cur = con.cursor ( )
     return cur
 
-def creat_table_db(cur,con,table_name):
+def creat_table_db(cur,con,table_name,values):
     cur.execute ( '''CREATE TABLE %s
-         (ID INT PRIMARY KEY NOT NULL,
-         NAME TEXT NOT NULL,
-         AGE INT NOT NULL,
-         MAIL CHAR(50),
-         COUNTRY CHAR(50),
-         LANGUAGE CHAR(50));''' % (table_name,) )
+         (%s);''' % (table_name, values) )
     con.commit ( )
     con.close ( )
     print ( "Table created successfully" )
