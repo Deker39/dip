@@ -15,12 +15,12 @@ cur = db.call_cursor(con)#вызов курсора
 table_name='USER_NAME'
 title  = 'ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE'
 
-face_id = input('\n Введите номер ID ')
-face_name = input('\n Введите номер NAME ')
-face_age = input('\n Введите номер AGE ')
-face_mail = input('\n Введите номер MAIL ')
-face_country = input('\n Введите номер COUNTRY ')
-face_language = input('\n Введите номер LANGUAGE ')
+face_id = input('\n Введите ID ')
+face_name = input('\n Введите  NAME ')
+face_age = input('\n Введите  AGE ')
+face_mail = input('\n Введите  MAIL ')
+face_country = input('\n Введите  COUNTRY ')
+face_language = input('\n Введите  LANGUAGE ')
 
 values = (face_id,face_name,face_age,face_mail,face_country,face_language)
 db.insert_db(cur,con,table_name,title,values)# загрузка данных о пользователе а бд
