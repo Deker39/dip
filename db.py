@@ -14,40 +14,42 @@ def call_cursor(con):
     cur = con.cursor ( )
     return cur
 
-def creat_table_db(cur,con):
-    cur.execute ( '''CREATE TABLE USER_PHOTO
+def creat_table_db(cur,con,table_name):
+    cur.execute ( '''CREATE TABLE %s
          (ID INT PRIMARY KEY NOT NULL,
          NAME TEXT NOT NULL,
          AGE INT NOT NULL,
          MAIL CHAR(50),
          COUNTRY CHAR(50),
-         LANGUAGE CHAR(50));''' )
+         LANGUAGE CHAR(50));''' % (table_name,) )
     con.commit ( )
     con.close ( )
     print ( "Table created successfully" )
 
-def select_db(cur):
-    cur.execute ( "SELECT id,name,age,mail,country, language from USER_NAME" )
+
+#def value():
+
+def select_db(cur,table_name,values):
+    cur.execute ( "SELECT %s from %s" %(values,table_name,))
     rows = cur.fetchall ( )
     return rows
 
-def insert_db(cur,con):
+def insert_db(cur,con,table_name,title,values):
     cur.execute (
-        "INSERT INTO USER_NAME (ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE) VALUES (3, 'John', 18,"
-        " 'bigtige@gmial.com', 'Ukrain','ukrain')" )
+        "INSERT INTO %s (%s) VALUES %s" %(table_name,title,values,))
     con.commit()
     con.close ( )
     print("Record inserted successfully into table")
 
 
-def delete_db(cur,con,table_name,pk,number):
-    cur.execute ( "DELETE from %s where %s=%s" %(table_name,pk,number,) )
+def delete_db(cur,con,table_name,pk,number_pk):
+    cur.execute ( "DELETE from %s where %s=%s" %(table_name,pk,number_pk,) )
     con.commit ( )
     con.close ( )
     print ( "Record deleted successfully" )
 
-def update_db(cur,con):
-    cur.execute ( "UPDATE USER_NAME set AGE = 25 where ID = 2" )
+def update_db(cur,con,table_name,values,number_values,pk,number_pk):
+    cur.execute ( "UPDATE %s set %s = %s where %s =%s" %(table_name,values,number_values,pk,number_pk,) )
     con.commit ( )
     con.close ( )
     print ( "Record updated successfully" )
