@@ -1,6 +1,6 @@
 import db
 
-table_name='USER_NAME'
+#table_name='USER_NAME'
 
 title  = 'ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE'
 
@@ -16,13 +16,10 @@ cur = db.call_cursor(con)#вызов курсора
 #values = (7, 'Marina', 21, 'shluha@gmial.com', 'Russian','ukrain')
 
 #db.insert_db(cur,con,table_name,title,values)
-#values = ('''ID INT PRIMARY KEY NOT NULL,
-#        NAME TEXT NOT NULL,
-#        AGE INT NOT NULL,
-#        MAIL CHAR(50),
-#       COUNTRY CHAR(50),
-#        LANGUAGE CHAR(50)''')
+values = ('''ID INT PRIMARY KEY NOT NULL,
+            NAME TEXT NOT NULL,
+            IMAGE OID''')
 
-#db.creat_table_db(cur,con,'USER_KREK',values)
+db.creat_table_db(cur,con,'IMAGE',values)
 
 

@@ -13,7 +13,9 @@ con = db.call_db()  #вызов бв
 cur = db.call_cursor(con)#вызов курсора
 
 table_name='USER_NAME'
-title  = 'ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE'
+table_image='IMAGE'
+title_name  = 'ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE'
+title_image = 'ID,NAME,IMAGE'
 
 face_id = input('\n Введите ID ')
 face_name = input('\n Введите  NAME ')
@@ -22,8 +24,8 @@ face_mail = input('\n Введите  MAIL ')
 face_country = input('\n Введите  COUNTRY ')
 face_language = input('\n Введите  LANGUAGE ')
 
-values = (face_id,face_name,face_age,face_mail,face_country,face_language)
-db.insert_db(cur,con,table_name,title,values)# загрузка данных о пользователе а бд
+values_name = (face_id,face_name,face_age,face_mail,face_country,face_language)
+db.insert_db(cur,con,table_name,title_name,values_name)# загрузка данных о пользователе а бд
 
 print("\n [INFO] Initializing face capture. Look the camera and wait ...")
 # Initialize individual sampling face count
@@ -40,7 +42,9 @@ while(True):
         count += 1
 
         # Save the captured image into the datasets folder
-        cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        #cv2.imwrite("dataset/User." + str(face_id) + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+        values_image = (face_id,face_name,cv2.imwrite( str(face_id) + '.' + str(count) + ".jpg",gray[y:y+h,x:x+w]))
+        db.insert_db(cur,con,table_image,values_image)
 
         cv2.imshow('image', img)
 
