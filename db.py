@@ -1,5 +1,16 @@
 import psycopg2
 
+#table_name='USER_NAME'
+#values = (7, 'Marina', 21, 'shluha@gmial.com', 'Russian','ukrain')
+#title  = 'ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE'
+#Vakues for creat_table
+#values = ('''ID INT PRIMARY KEY NOT NULL,
+#        NAME TEXT NOT NULL,
+#        AGE INT NOT NULL,
+#        MAIL CHAR(50),
+#       COUNTRY CHAR(50),
+#        LANGUAGE CHAR(50)''')
+
 def call_db():
     con = psycopg2.connect (
         database="leyla",

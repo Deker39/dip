@@ -1,5 +1,6 @@
 import cv2
 import os
+import db
 
 cam = cv2.VideoCapture(0)
 cam.set(3, 640) # set video width
@@ -8,7 +9,21 @@ cam.set(4, 480) # set video height
 face_detector = cv2.CascadeClassifier('/home/pi/opencv/data/haarcascades/haarcascade_frontalface_default.xml')
 
 # For each person, enter one numeric face id
-face_id = input('\n enter user id end press  ==>  ')
+con = db.call_db()  #вызов бв
+cur = db.call_cursor(con)#вызов курсора
+
+table_name='USER_NAME'
+title  = 'ID,NAME,AGE,MAIL,COUNTRY,LANGUAGE'
+
+face_id = input('\n Введите номер ID ')
+face_name = input('\n Введите номер NAME ')
+face_age = input('\n Введите номер AGE ')
+face_mail = input('\n Введите номер MAIL ')
+face_country = input('\n Введите номер COUNTRY ')
+face_language = input('\n Введите номер LANGUAGE ')
+
+values = (face_id,face_name,face_age,face_mail,face_country,face_language)
+db.insert_db(cur,con,table_name,title,values)# загрузка данных о пользователе а бд
 
 print("\n [INFO] Initializing face capture. Look the camera and wait ...")
 # Initialize individual sampling face count
